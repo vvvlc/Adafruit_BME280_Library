@@ -16,6 +16,7 @@
  ***************************************************************************/
 #include "Arduino.h"
 #include <Wire.h>
+#include <SoftwareWire.h>
 #include <SPI.h>
 #include "Adafruit_BME280.h"
 
@@ -40,7 +41,7 @@ Adafruit_BME280::Adafruit_BME280(int8_t cspin, int8_t mosipin, int8_t misopin, i
     @brief  Initialise sensor with given parameters / settings
 */
 /**************************************************************************/
-bool Adafruit_BME280::begin(TwoWire *theWire)
+bool Adafruit_BME280::begin(TwoWireX *theWire)
 {
 	_wire = theWire;
 	_i2caddr = BME280_ADDRESS;
@@ -50,11 +51,11 @@ bool Adafruit_BME280::begin(TwoWire *theWire)
 bool Adafruit_BME280::begin(uint8_t addr)
 {
 	_i2caddr = addr;
-	_wire = &Wire;
+//	_wire = &Wire;  //no default SoftwareWire variable
 	return init();
 }
 
-bool Adafruit_BME280::begin(uint8_t addr, TwoWire *theWire)
+bool Adafruit_BME280::begin(uint8_t addr, TwoWireX *theWire)
 {
     _i2caddr = addr;
 	_wire = theWire;
@@ -64,7 +65,7 @@ bool Adafruit_BME280::begin(uint8_t addr, TwoWire *theWire)
 bool Adafruit_BME280::begin(void)
 {
     _i2caddr = BME280_ADDRESS;
-	_wire = &Wire;
+//	_wire = &Wire; //no default SoftwareWire variable
 	return init();
 }
 

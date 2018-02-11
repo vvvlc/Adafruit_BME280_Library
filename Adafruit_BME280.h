@@ -25,6 +25,11 @@
 
 #include <Adafruit_Sensor.h>
 #include <Wire.h>
+#include <SoftwareWire.h>
+
+#define TwoWireX SoftwareWire
+#define WireX (SoftwareWire)
+//#define TwoWireX TwoWire
 
 /*=========================================================================
     I2C ADDRESS/BITS
@@ -167,9 +172,9 @@ class Adafruit_BME280 {
         Adafruit_BME280(int8_t cspin, int8_t mosipin, int8_t misopin, int8_t sckpin);
 		
 		bool begin(void);
-		bool begin(TwoWire *theWire);
+		bool begin(TwoWireX *theWire);
 		bool begin(uint8_t addr);
-        bool begin(uint8_t addr, TwoWire *theWire);
+        bool begin(uint8_t addr, TwoWireX *theWire);
 		bool init();
 
 	void setSampling(sensor_mode mode              = MODE_NORMAL,
@@ -190,7 +195,7 @@ class Adafruit_BME280 {
 
         
     private:
-		TwoWire *_wire;
+		TwoWireX *_wire;
         void readCoefficients(void);
         bool isReadingCalibration(void);
         uint8_t spixfer(uint8_t x);
