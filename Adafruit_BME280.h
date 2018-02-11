@@ -28,7 +28,6 @@
 #include <SoftwareWire.h>
 
 #define TwoWireX SoftwareWire
-#define WireX (SoftwareWire)
 //#define TwoWireX TwoWire
 
 /*=========================================================================

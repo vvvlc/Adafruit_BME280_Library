@@ -3,7 +3,15 @@ This is a library for the Adafruit BME280 Humidity, Barometric Pressure + Temp s
 Designed specifically to work with the Adafruit BME280 Breakout 
  * http://www.adafruit.com/products/2652
 
-Added support for SoftwareWire - https://github.com/Testato/SoftwareWire
+### SoftwareWire Support
+* supported [SoftwareWire library](https://github.com/Testato/SoftwareWire)
+* Adafruit_BME280 cannot use hardware I2C / Wire library anymore
+* Example how to use two BME280 devices attached on two independant Software I2C [bme280test-swi2c.ino](examples/bme280test-swi2c/bme280test-swi2c.ino)
+* `Adafruit_BME280::begin(void)` and `Adafruit_BME280::begin(uint8_t addr)` cannot be used because there is no default `SoftwareWire` variable, use `Adafruit_BME280::begin(TwoWireX *theWire)` or `Adafruit_BME280::begin(uint8_t addr, TwoWireX *theWire)` instead.
+* if you want to use another Software I2C library instead of [SoftwareWire library](https://github.com/Testato/SoftwareWire), you have to
+  * replace `#include <SoftwareWire.h>` in Adafruit_BME280.cpp and Adafruit_BME280.h
+  * change `#define TwoWireX SoftwareWire` to new datatype in Adafruit_BME280.h
+
 
 These sensors use I2C or SPI to communicate, up to 4 pins are required to interface
 
